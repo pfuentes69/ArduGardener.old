@@ -9,7 +9,7 @@
     previousMillis = 0;
   }
   
-  void Display::configure(int lines, int rows, long setUpdatePeriod = 50, int setLightCountInit = 200)
+  void Display::configure(int lines, int rows, unsigned long setUpdatePeriod = 50, int setLightCountInit = 200)
   {
     lcd.begin(lines, rows);
     this->clear();
@@ -48,7 +48,7 @@
   {
     String newBuf = bufLCD[Y];
     // Update buffer
-    for (int i = 0; i < str.length(); i++) {
+    for (unsigned int i = 0; i < str.length(); i++) {
       newBuf.setCharAt(X+i, str.charAt(i));
     }
     // print if buffer changed

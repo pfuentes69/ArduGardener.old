@@ -12,7 +12,7 @@ class Display
   hd44780_I2Cexp lcd; // declare lcd object: auto locate & config display for hd44780 chip
   String bufLCD[4];
   int X, Y;
-  long updatePeriod;
+  unsigned long updatePeriod;
   int lightCountInit;
   // These maintain the current state
   unsigned long previousMillis;   // will store last time it was updated
@@ -20,7 +20,7 @@ class Display
   
   public:
   Display();
-  void configure(int lines, int rows, long setUpdatePeriod = 50, int setLightCountInit = 200);
+  void configure(int lines, int rows, unsigned long setUpdatePeriod = 50, int setLightCountInit = 200);
   void clear();
   void backlight();
   void noBacklight(); 

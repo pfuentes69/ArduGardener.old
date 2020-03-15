@@ -8,7 +8,7 @@
 //*** 
 //**************************************
 
-#define USE_NETWORK
+//#define USE_NETWORK
 
 // CHECK IF NEEDED "#define DEBUG" in Debug.h
 
@@ -131,7 +131,7 @@ const char* submenu[][7] = {
   }
 };
 
-const char* command[][7] = {
+int command[][7] = {
   {
     AUTO_6H,
     AUTO_12H,
