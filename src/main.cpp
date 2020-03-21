@@ -50,6 +50,7 @@
 #define MANUAL_MODE 2
 #define AUTO_MODE 3
 #define AUTO_WATERING 4
+#define ERROR_MODE 5
 
 #define NO_COMMAND 0
 #define STOP 1
@@ -88,7 +89,8 @@ const char* modes[] = {
   "IDDLE",
   "MENU",
   "MANUAL",
-  "AUTO"
+  "AUTO",
+  "ERROR"
 };
 
 const char* menu[] = 
@@ -252,6 +254,11 @@ class Gardener {
         case AUTO_WATERING:
           ledRGB.configure(STATUS_LED_R_PIN, STATUS_LED_G_PIN, STATUS_LED_B_PIN, RGB_FLASHER_COLOR_BLUE, RGB_FLASHER_MODE_BLINK4);
           break;
+        case ERROR_MODE:
+          ledRGB.configure(STATUS_LED_R_PIN, STATUS_LED_G_PIN, STATUS_LED_B_PIN, RGB_FLASHER_COLOR_RED, RGB_FLASHER_MODE_BLINK6);
+          display.print(2, "ERROR!!!");
+          relayTemp.cancel();
+          break;
       }
     }
   }
@@ -374,9 +381,18 @@ class Gardener {
    
     if ((millis() - lastUpdate) > updateInterval) {
 //      Debug::log("Start Gardener Update");
+      // Check water level
+      if (!digitalRead(WATER_LEVEL_PIN)) {
+        // No Water we need to change the mode to error
+        this->setMode(ERROR_MODE);
+      }
       // time to update
       key = readKeyboard();
       switch (mode) {
+        case ERROR_MODE: // Some error 
+          // We can't do anything
+          // To recover it's required to restart manually
+          break;
         case AUTO_MODE: // Auto
         case AUTO_WATERING: // Auto on watering
           if (relayTemp.getState()) {
@@ -556,6 +572,9 @@ void setup () {
   display.configure(LCD_ROWS, LCD_LINES);
   relayTemp.configure(RELAY_PIN, RELAY_LED_PIN);
   gardener.configure(100);
+
+  // Set the water level sensor
+  pinMode(WATER_LEVEL_PIN, INPUT_PULLUP);
 
   // set the analogue pin for input and turn on the internal pullup resistor
   pinMode(KEYPAD_PIN, INPUT_PULLUP); 
