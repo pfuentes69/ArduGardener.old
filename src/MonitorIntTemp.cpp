@@ -43,7 +43,7 @@ void MonitorIntTemp::update()
       Serial.println("Encender ventilador");
       digitalWrite(VENT_PIN, HIGH);   // turn the vent on (HIGH is the voltage level)
       ventStatus = true;
-    } else if (ventStatus && (temperatura < (alarmTemp - 2))) {
+    } else if (ventStatus && (temperatura < (alarmTemp - 4))) {
       Serial.println("Temperatura normal");
       digitalWrite(VENT_PIN, LOW);    // turn the LED off by making the voltage LOW
       ventStatus = false;

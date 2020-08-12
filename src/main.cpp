@@ -2,7 +2,7 @@
 //**************************************
 //*** BEGIN MEGAGARDENER
 //*** 
-//*** Version 2.3
+//*** Version 2.4
 //*** 
 //*** Autor: Pedro Fuentes
 //*** 
@@ -26,7 +26,7 @@
 #include "Display.h"
 #include "RGBFlasher.h"
 
-#define VERSION "2.3"
+#define VERSION "2.4"
 
 #define NO_MENU -1
 #define MENU_DEFAULT 0
@@ -596,10 +596,10 @@ void setup () {
   // Print a message to the LCD
 //  lcd.backlight();
   display.print(0, "Papillon Garden ");
-  display.print(1, "Version 2.3     ");
-  delay(200);
+  display.print(1, "Version 2.4     ");
+  delay(1000);
 
-  monitorIntTemp.configure(30, 30000);
+  monitorIntTemp.configure(35, 30000);
   monitorMeteo.configure(30000);
 
 #ifdef USE_NETWORK  
