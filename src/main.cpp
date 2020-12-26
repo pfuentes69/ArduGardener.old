@@ -596,10 +596,10 @@ void setup () {
   // Print a message to the LCD
 //  lcd.backlight();
   display.print(0, "Papillon Garden ");
-  display.print(1, "Version 2.3     ");
+  display.print(1, "Version 2.4     ");
   delay(200);
 
-  monitorIntTemp.configure(30, 30000);
+  monitorIntTemp.configure(35, 30000);
   monitorMeteo.configure(30000);
 
 #ifdef USE_NETWORK  
